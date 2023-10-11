@@ -10,19 +10,22 @@
     <h1 class="my-4">All Flashcards</h1>
     
     <ul class="list-group">
-        <!-- Loop through and display all flashcards -->
+        <!-- Loop through and display all flashcards here -->
+        {% for flashcard in flashcards %}
         <li class="list-group-item">
-            <strong>Question:</strong> What is the capital of France?<br>
-            <strong>Answer:</strong> Paris
+            <strong>Subject:</strong> {{ flashcard.subject }}<br>
+            <strong>Question:</strong> {{ flashcard.question }}<br>
+            <strong>Answer:</strong> {{ flashcard.answer }}
         </li>
-        <!-- Add more flashcards here -->
+        {% endfor %}
     </ul>
     
     <div class="mt-4">
         <a href="index.html" class="btn btn-primary">Back to Main Page</a>
     </div>
 </div>
-
 </body>
 </html>
+
+
 

@@ -54,6 +54,10 @@
     <h2>Add New Flashcard</h2>
     <form id="flashcardForm">
         <div class="form-group">
+            <label for="subject">Flashcard Subject:</label>
+            <input type="text" class="form-control" id="newSubject" required>
+        </div>
+        <div class="form-group">
             <label for="newQuestion">Question:</label>
             <input type="text" class="form-control" id="newQuestion" required>
         </div>
@@ -63,6 +67,7 @@
         </div>
         <button type="button" class="btn btn-primary" onclick="addFlashcard()">Add Flashcard</button>
     </form>
+    
 </div>
 
 <script>
@@ -138,6 +143,40 @@
     // Initialize with the first flashcard
     updateFlashcard();
 </script>
+<script>
+    function addFlashcard() {
+        // Get the input values
+        const subject = document.getElementById('newSubject').value;
+        const question = document.getElementById('newQuestion').value;
+        const answer = document.getElementById('newAnswer').value;
+    
+        // Create a JSON object with the data
+        const flashcardData = {
+            subject: subject,
+            question: question,
+            answer: answer,
+        };
+    
+        // Send the data to the server using an HTTP POST request
+        fetch('/add_flashcard', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(flashcardData),
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response (e.g., show a success message)
+            console.log(data);
+        })
+        .catch(error => {
+            // Handle errors
+            console.error(error);
+        });
+    }
+    </script>
+    
 
 </body>
 </html>
