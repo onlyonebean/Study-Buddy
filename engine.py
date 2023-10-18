@@ -1,15 +1,23 @@
 from flask import Flask, request, render_template, redirect, url_for
 import mysql.connector
+import os
 
 app = Flask(__name__)
 
 # Configure your MySQL connection
-db = {
-    "host":"Nona-Pahia",
-    "user":"Fiona",
-    "password":"9271",
-    "database":"STUDY"
-}
+host="localhost"
+user="root"
+port="3306"
+password="9271"
+database="STUDY"
+
+db = mysql.connector.connect(
+    host=host,
+    port=port,
+    user=user,
+    password=password,
+    database=database
+)
 
 @app.route('/add_flashcard', methods=['POST'])
 def add_flashcard():
@@ -30,6 +38,7 @@ def add_flashcard():
 
 @app.route('/all_flashcards')
 def all_flashcards():
+    print(db)
     cursor = db.cursor()
     cursor.execute("SELECT * FROM flashcards")
     flashcards = cursor.fetchall()
@@ -41,5 +50,9 @@ def all_flashcards():
 def main_page():
     return render_template('index.html')
 
+# if __name__ == '__main__':
+#     app.run()
+
 if __name__ == '__main__':
-    app.run()
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
