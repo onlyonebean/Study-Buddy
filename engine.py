@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for
 import mysql.connector
-import os
+import os, json
 
 app = Flask(__name__)
 
@@ -21,11 +21,13 @@ db = mysql.connector.connect(
 
 @app.route('/add_flashcard', methods=['POST'])
 def add_flashcard():
+
     if request.method == 'POST':
         # Get flashcard data from the form
-        subject = request.form['subject']
-        question = request.form['question']
-        answer = request.form['answer']
+        request_body = json.loads(request.data)
+        subject = request_body['subject']
+        question = request_body['question']
+        answer = request_body['answer']
 
         # Insert the flashcard data into the database
         cursor = db.cursor()
@@ -55,4 +57,4 @@ def main_page():
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=True)

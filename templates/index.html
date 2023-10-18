@@ -133,11 +133,12 @@
     }
 
     function addFlashcard() {
-        const question = document.getElementById('newQuestion').value;
-        const answer = document.getElementById('newAnswer').value;
-        flashcards.push({ question, answer });
-        document.getElementById('newQuestion').value = '';
-        document.getElementById('newAnswer').value = '';
+        // console.log("lmaoooooooooooooooooooooo")
+        // const question = document.getElementById('newQuestion').value;
+        // const answer = document.getElementById('newAnswer').value;
+        // flashcards.push({ question, answer });
+        // document.getElementById('newQuestion').value = '';
+        // document.getElementById('newAnswer').value = '';
     }
 
     // Initialize with the first flashcard
@@ -149,7 +150,7 @@
         const subject = document.getElementById('newSubject').value;
         const question = document.getElementById('newQuestion').value;
         const answer = document.getElementById('newAnswer').value;
-    
+        
         // Create a JSON object with the data
         const flashcardData = {
             subject: subject,
